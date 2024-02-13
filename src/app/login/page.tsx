@@ -1,9 +1,41 @@
-import React from 'react'
+"use client";
+import { Button, Form } from "antd";
+import Link from "next/link";
+import React from "react";
 
 const Login = () => {
-  return (
-    <div>Login</div>
-  )
-}
 
-export default Login
+  const onFinsh = (values:any)=>{
+    
+  }
+  return (
+    <div className="flex justify-center h-screen items-center bg-primary">
+      <div className="card p-5 w-450">
+        <h1 className="text-xl ">A K M JOPS Login</h1>
+        <hr />
+        <Form
+          layout="vertical"
+          className="flex flex-col gap-3"
+          onFinish={onFinsh}
+        >
+          <Form.Item label="Email" name="email">
+            <input type="email" className="input" />
+          </Form.Item>
+          <Form.Item label="Password" name="password">
+            <input type="password" className="input" />
+          </Form.Item>
+          <Button type="primary" htmlType="submit" block>
+            Login
+          </Button>
+          <Link href="/register">
+            <span className="mt-5">
+              Don't have an account? <span>Register</span>
+            </span>
+          </Link>
+        </Form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

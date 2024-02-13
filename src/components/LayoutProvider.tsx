@@ -9,7 +9,6 @@ const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: "00b96b",
             },
           }}
         >

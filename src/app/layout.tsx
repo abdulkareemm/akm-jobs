@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import LayoutProvider from "../components/LayoutProvider";
-
+import "./../stylesheets/commenClasses.css";
+import "./../stylesheets/antdOverride.css";
+import "./../stylesheets/layout.css";
+import "./../stylesheets/loader.css";
+import LayoutProvider from "@/components/LayoutProvider";
 
 export const metadata: Metadata = {
   title: "A K M-JOPS",
@@ -13,9 +16,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <LayoutProvider>
-      {children}
-    </LayoutProvider>
-  );
+  return <LayoutProvider>{children}</LayoutProvider>;
 }
