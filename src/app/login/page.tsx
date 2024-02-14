@@ -35,12 +35,6 @@ const Login = () => {
           className="flex flex-col gap-3"
           onFinish={onFinish}
         >
-          <Form.Item label="Login as " name="userType">
-            <Radio.Group>
-              <Radio value="employer">Employer</Radio>
-              <Radio value="employee">Employee</Radio>
-            </Radio.Group>
-          </Form.Item>
           <Form.Item label="Email" name="email">
             <input type="email" className="input" />
           </Form.Item>

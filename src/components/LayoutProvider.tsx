@@ -7,6 +7,7 @@ import { setLoading } from "@/redux/loader";
 import axios from "axios";
 import { setCurrentUser } from "@/redux/userSlice";
 import Loader from "./Loader";
+import PageTitle from "./PageTitle";
 
 function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [menuItems, setMenuItems] = useState([
@@ -105,7 +106,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
             <div className="layout-parent">
               <div className="sidebar ">
                 <div className="logo">
-                  {isSidebarExpanded && <h1>AKMJOBS</h1>}
+                  {isSidebarExpanded && <PageTitle title="AKMJOPS"/>}
 
                   {!isSidebarExpanded && (
                     <i
@@ -134,6 +135,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
                             ? "flex-start"
                             : "center",
                         }}
+                        onClick={() => router.push(item.path)}
                       >
                         <i className={item.icon}></i>
                         <span>{isSidebarExpanded && item.name}</span>
