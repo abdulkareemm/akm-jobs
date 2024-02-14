@@ -1,31 +1,33 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: "string",
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: "string",
+      required: true,
+    },
+    email: {
+      type: "string",
+      required: true,
+    },
+    password: {
+      type: "string",
+      required: true,
+    },
+    isAdmin: {
+      type: "boolean",
+      required: true,
+      default: false,
+    },
   },
-  email: {
-    type: "string",
-    required: true,
-  },
-  password: {
-    type: "string",
-    required: true,
-  },
-  isAdmin:{
-    type: "boolean",
-    required: true,
-    default: false,
+  {
+    timestamps: true,
   }
-},{
-    timestamps:true
-});
-
+);
 
 // delete old one
-const userModel = mongoose.model('user')
-mongoose.deleteModel(userModel.modelName)
+const userModel = mongoose.model("user");
+mongoose.deleteModel(userModel.modelName);
 
-// create new model
-module.exports =mongoose.model('user',userSchema)
+const User = mongoose.model("users", userSchema);
+export default User;
