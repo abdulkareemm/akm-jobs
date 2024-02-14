@@ -1,21 +1,27 @@
-"use client"
-import { Button, Form, Radio, message } from 'antd';
-import axios from 'axios';
-import Link from 'next/link';
+"use client";
+import { setLoading } from "@/redux/loader";
+import { Button, Form, Radio, message } from "antd";
+import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from 'react'
+import React from "react";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
   const router = useRouter();
-  const onFinish = async(values : any)=>{
+  const dispatch = useDispatch();
+  const onFinish = async (values: any) => {
     try {
-      const response = await axios.post('/api/users/register', values)
-      message.success(response.data.message)
-      router.push('/login')
-    } catch (error:any) {
-        message.error(error.response.data.message||"Something went wrong")
+      dispatch(setLoading(true));
+      const response = await axios.post("/api/users/register", values);
+      message.success(response.data.message);
+      router.push("/login");
+    } catch (error: any) {
+      message.error(error.response.data.message || "Something went wrong");
+    } finally {
+      dispatch(setLoading(false));
     }
-  }
+  };
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
       <div className="card p-5 w-450">
@@ -53,6 +59,6 @@ const Register = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Register
+export default Register;

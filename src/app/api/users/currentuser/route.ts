@@ -1,8 +1,9 @@
+import { connectDB } from "@/config/dbConfig";
 import { validateJWT } from "@/helpers/validateJWT";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 
-
+connectDB()
 export async function GET(request:NextRequest){
     try {
         const userId = await validateJWT(request)
@@ -14,6 +15,7 @@ export async function GET(request:NextRequest){
         return NextResponse.json({message:"User data fetched successfully",data:user})
         
     } catch (error:any) {
+        console.log("error happen", error.message);
             return NextResponse.json({message:error.message},{status:500})
     }
 }

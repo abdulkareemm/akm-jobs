@@ -1,9 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { ConfigProvider } from "antd";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { ConfigProvider, message } from "antd";
+import { usePathname, useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/loader";
+import axios from "axios";
+import { setCurrentUser } from "@/redux/userSlice";
+import Loader from "./Loader";
 
-function LayoutProvider ({ children }: { children: React.ReactNode }) {
+function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [menuItems, setMenuItems] = useState([
     {
       name: "Home",
@@ -31,8 +36,38 @@ function LayoutProvider ({ children }: { children: React.ReactNode }) {
       icon: "ri-save-line",
     },
   ]);
+  const { currentUser } = useSelector((state: any) => state.users);
+  const { loading } = useSelector((state: any) => state.loader);
+  const dispatch = useDispatch();
+  const router = useRouter();
   const pathname = usePathname();
   const [isSidebarExpanded, setIsSidebarExpanded] = React.useState(true);
+  const getCurrentUser = async () => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios.get("/api/users/currentuser");
+      const isEmployer = response.data.data.userType === "employer";
+
+      if (isEmployer) {
+        const tempMenuItems: any = menuItems;
+        tempMenuItems[2].name = "Posted Jobs";
+        tempMenuItems[2].path = "/jobs";
+        setMenuItems(tempMenuItems);
+      }
+
+      dispatch(setCurrentUser(response.data.data));
+    } catch (error: any) {
+      message.error(error.response.data.message || "Something went wrong");
+      message.error("Please clear your cookies and try again");
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+  useEffect(() => {
+    if (pathname !== "/login" && pathname !== "/register" && !currentUser) {
+      getCurrentUser();
+    }
+  }, [pathname]);
 
   return (
     <html lang="en">
@@ -50,6 +85,7 @@ function LayoutProvider ({ children }: { children: React.ReactNode }) {
             },
           }}
         >
+          {loading && <Loader />}
           {pathname === "/login" || pathname === "/register" ? (
             <div>{children}</div>
           ) : (
@@ -94,7 +130,9 @@ function LayoutProvider ({ children }: { children: React.ReactNode }) {
                 </div>
                 <div className="user-info flex justify-between items-center">
                   {isSidebarExpanded && (
-                    <div className="flex flex-col">User name</div>
+                    <div className="flex flex-col">
+                      <span>{currentUser?.name}</span>
+                    </div>
                   )}
 
                   <i className="ri-logout-box-r-line"></i>
@@ -107,6 +145,6 @@ function LayoutProvider ({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
-};
+}
 
 export default LayoutProvider;
