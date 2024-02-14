@@ -1,11 +1,17 @@
 "use client"
-import { Button, Form, Radio } from 'antd';
+import { Button, Form, Radio, message } from 'antd';
+import axios from 'axios';
 import Link from 'next/link';
 import React from 'react'
 
 const Register = () => {
-  const onFinish = (values : any)=>{
-
+  const onFinish = async(values : any)=>{
+    try {
+      const response = await axios.post('/api/users/register', values)
+      message.success(response.data.message)
+    } catch (error:any) {
+        message.error(error.response.data.message||"Something went wrong")
+    }
   }
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
@@ -23,7 +29,7 @@ const Register = () => {
               <Radio value="employee">Employee</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Username" name="username">
+          <Form.Item label="Name" name="name">
             <input type="text" className="input" />
           </Form.Item>
           <Form.Item label="Email" name="email">
@@ -33,7 +39,7 @@ const Register = () => {
             <input type="password" className="input" />
           </Form.Item>
           <Button type="primary" htmlType="submit" block>
-            Login
+            Register
           </Button>
           <Link href="/login">
             <span className="mt-5">

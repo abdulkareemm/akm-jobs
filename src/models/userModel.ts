@@ -2,22 +2,27 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    username: {
+    name: {
       type: "string",
       required: true,
     },
     email: {
-      type: "string",
+      type: String,
       required: true,
     },
     password: {
-      type: "string",
+      type: String,
       required: true,
     },
     isAdmin: {
-      type: "boolean",
+      type: Boolean,
       required: true,
       default: false,
+    },
+    userType: {
+      type: String,
+      required: true,
+      default: "employee",
     },
   },
   {
@@ -26,8 +31,11 @@ const userSchema = new mongoose.Schema(
 );
 
 // delete old one
-const userModel = mongoose.model("user");
-mongoose.deleteModel(userModel.modelName);
+if(mongoose.models.users){
+  const userModel = mongoose.model("users");
+  mongoose.deleteModel(userModel.modelName);
+}
+
 
 const User = mongoose.model("users", userSchema);
 export default User;
