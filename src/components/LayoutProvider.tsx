@@ -63,6 +63,19 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
       dispatch(setLoading(false));
     }
   };
+  const onLogout = async () => {
+    try {
+      dispatch(setLoading(true));
+      await axios.post("/api/users/logout");
+      message.success("Logged out successfully");
+      dispatch(setCurrentUser(null));
+      router.push("/login");
+    } catch (error: any) {
+      message.error(error.response.data.message || "Something went wrong");
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
   useEffect(() => {
     if (pathname !== "/login" && pathname !== "/register" && !currentUser) {
       getCurrentUser();
@@ -131,11 +144,11 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
                 <div className="user-info flex justify-between items-center">
                   {isSidebarExpanded && (
                     <div className="flex flex-col">
-                      <span>{currentUser?.name}</span>
+                      <span >{currentUser?.name}</span>
                     </div>
                   )}
 
-                  <i className="ri-logout-box-r-line"></i>
+                  <i className="ri-logout-box-r-line" onClick={onLogout}></i>
                 </div>
               </div>
               <div className="body">{children}</div>
