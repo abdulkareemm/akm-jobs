@@ -2,13 +2,16 @@
 import { Button, Form, Radio, message } from 'antd';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
 import React from 'react'
 
 const Register = () => {
+  const router = useRouter();
   const onFinish = async(values : any)=>{
     try {
       const response = await axios.post('/api/users/register', values)
       message.success(response.data.message)
+      router.push('/login')
     } catch (error:any) {
         message.error(error.response.data.message||"Something went wrong")
     }
