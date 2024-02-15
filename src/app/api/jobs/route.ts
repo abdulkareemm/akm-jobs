@@ -23,7 +23,6 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     validateJWT(request);
-
     // fetch query string parameters
     const { searchParams } = new URL(request.url);
     const user = searchParams.get("user");

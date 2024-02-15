@@ -25,6 +25,18 @@ const Jobs = () => {
       dispatch(setLoading(false))
     }
   }
+  const deleteJob = async (jobId: string) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios.delete(`/api/jobs/${jobId}`);
+      message.success(response.data.message);
+      fetchJobs();
+    } catch (error: any) {
+      message.error(error.message);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
   useEffect(()=>{
     fetchJobs()
   },[])
