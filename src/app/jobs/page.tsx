@@ -19,7 +19,6 @@ function Jobs() {
     try {
       dispatch(setLoading(true));
       const response = await axios.get(`/api/jobs?user=${currentUser._id}`);
-      console.log(response.data.data);
       setJobs(response.data.data);
     } catch (error: any) {
       message.error(error.message);
