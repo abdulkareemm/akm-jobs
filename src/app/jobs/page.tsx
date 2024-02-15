@@ -1,30 +1,33 @@
-"use client"
-import PageTitle from '@/components/PageTitle'
-import React, { useEffect, useState } from 'react'
-import {useRouter} from "next/navigation"
-import { Button, message ,Table,Tooltip } from 'antd'
-import { useDispatch } from 'react-redux'
-import { setLoading } from '@/redux/loader'
-import axios from 'axios'
-import moment from 'moment'
+"use client";
+import PageTitle from "@/components/PageTitle";
+import { Button, Table, message } from "antd";
+import React from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import moment from "moment";
+import { Tooltip } from "antd";
+import { setLoading } from "@/redux/loader";
 
-const Jobs = () => {
-  const [jobs,setJobs] = useState([])
-  console.log(jobs)
-  const dispatch = useDispatch()
-  const fetchJobs = async()=>{
+function Jobs() {
+  const [jobs, setJobs] = React.useState([]);
+  const { currentUser } = useSelector((state: any) => state.users);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const fetchJobs = async () => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.get("/api/jobs")
-      setJobs(response.data.data)
-
-      
-    } catch (error:any) {
-        message.error(error.message)
-    }finally{
-      dispatch(setLoading(false))
+      const response = await axios.get(`/api/jobs?user=${currentUser._id}`);
+      console.log(response.data.data);
+      setJobs(response.data.data);
+    } catch (error: any) {
+      message.error(error.message);
+    } finally {
+      dispatch(setLoading(false));
     }
-  }
+  };
+
   const deleteJob = async (jobId: string) => {
     try {
       dispatch(setLoading(true));
@@ -37,9 +40,11 @@ const Jobs = () => {
       dispatch(setLoading(false));
     }
   };
-  useEffect(()=>{
-    fetchJobs()
-  },[])
+
+  React.useEffect(() => {
+    fetchJobs();
+  }, []);
+
   const columns = [
     {
       title: "Title",
@@ -74,7 +79,7 @@ const Jobs = () => {
           <Tooltip title="Delete">
             <i
               className="ri-delete-bin-line"
-              // onClick={() => deleteJob(record._id)}
+              onClick={() => deleteJob(record._id)}
             ></i>
           </Tooltip>
           <Tooltip title="Edit">
@@ -86,25 +91,23 @@ const Jobs = () => {
           <Tooltip title="Applications">
             <i
               className="ri-file-list-3-line"
-              onClick={() => {
-                // setSelectedJob(record);
-                // setShowApplications(true);
-              }}
+              
             ></i>
           </Tooltip>
         </div>
       ),
     },
   ];
-    const router = useRouter()
+
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <PageTitle title="Jobs" />
         <Button type="primary" onClick={() => router.push("/jobs/new")}>
           New Job
         </Button>
       </div>
+
       <div className="my-2">
         <Table columns={columns} dataSource={jobs} />
       </div>
@@ -112,4 +115,4 @@ const Jobs = () => {
   );
 }
 
-export default Jobs
+export default Jobs;
