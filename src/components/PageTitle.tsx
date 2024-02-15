@@ -1,14 +1,15 @@
 import React from "react";
+import Divider from "./Divider";
 
-const PageTitle = ({ title }: { title: string }) => {
+function PageTitle({ title }: { title: string }) {
   return (
-    <div className="my-2">
-      <h1 className="text-2xl my-2">
+    <div className="my-3">
+      <h1 className="text-xl my-1">
         <b>{title}</b>
       </h1>
-      <hr />
+      <Divider />
     </div>
   );
-};
+}
 
 export default PageTitle;
