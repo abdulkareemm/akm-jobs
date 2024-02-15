@@ -23,3 +23,7 @@ if (mongoose.models.applications) {
   const applicationModel = mongoose.model("applications");
   mongoose.deleteModel(applicationModel.modelName);
 }
+
+// create new model
+const Application = mongoose.model("applications", applicationSchema);
+export default Application;
