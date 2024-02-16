@@ -8,6 +8,7 @@ import axios from "axios";
 import moment from "moment";
 import { Tooltip } from "antd";
 import { setLoading } from "@/redux/loader";
+import Applications from "@/components/Applications";
 
 function Jobs() {
   const [selectedJob = {}, setSelectedJob] = React.useState({} as any);
