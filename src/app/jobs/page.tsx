@@ -10,6 +10,9 @@ import { Tooltip } from "antd";
 import { setLoading } from "@/redux/loader";
 
 function Jobs() {
+  const [selectedJob = {}, setSelectedJob] = React.useState({} as any);
+  const [showApplications = false, setShowApplications] =
+    React.useState<boolean>(false);
   const [jobs, setJobs] = React.useState([]);
   const { currentUser } = useSelector((state: any) => state.users);
   const dispatch = useDispatch();
@@ -90,7 +93,10 @@ function Jobs() {
           <Tooltip title="Applications">
             <i
               className="ri-file-list-3-line"
-              
+              onClick={() => {
+                setSelectedJob(record);
+                setShowApplications(true);
+              }}
             ></i>
           </Tooltip>
         </div>
@@ -110,6 +116,13 @@ function Jobs() {
       <div className="my-2">
         <Table columns={columns} dataSource={jobs} />
       </div>
+      {showApplications && (
+        <Applications
+          selectedJob={selectedJob}
+          setShowApplications={setShowApplications}
+          showApplications={showApplications}
+        />
+      )}
     </div>
   );
 }
