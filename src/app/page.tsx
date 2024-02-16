@@ -1,5 +1,6 @@
 "use client";
 
+import Filters from "@/components/Filters";
 import { setLoading } from "@/redux/loader";
 import { Col, Divider, Row, message } from "antd";
 import axios from "axios";
@@ -8,13 +9,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 export default function Home() {
+  const [filters, setFilters] = React.useState({
+    searchText: "",
+    location: "",
+  });
   const [jobs = [], setJobs] = React.useState([]);
   const dispatch = useDispatch()
   const router = useRouter()
   const fetchJobs = async () => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.get(`/api/jobs`);
+      const response = await axios.get(`/api/jobs`, { params: filters });
       setJobs(response.data.data);
     } catch (error: any) {
       message.error(error.message);
@@ -28,6 +33,7 @@ export default function Home() {
 
   return (
     <div>
+      <Filters filters={filters} setFilters={setFilters} getData={fetchJobs} />
       <Row>
         {jobs.map((job: any) => (
           <Col
