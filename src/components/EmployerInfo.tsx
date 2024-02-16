@@ -2,41 +2,41 @@ import { Col, Row } from "antd";
 import React from "react";
 import Divider from "./Divider";
 
-function EmployerInfo({ emploerInfo }: { emploerInfo: any }) {
+function EmployerInfo({ employerInfo }: { employerInfo: any }) {
   return (
     <Row>
       <Col span={12}>
         <div className="flex flex-col gap-3">
           <div className="flex justify-between">
             <span>Company Name</span>
-            <span>{emploerInfo.name}</span>
+            <span>{employerInfo.name}</span>
           </div>
           <div className="flex justify-between">
             <span>Establishment Year</span>
-            <span>{emploerInfo.establishmentYear}</span>
+            <span>{employerInfo.establishmentYear}</span>
           </div>
           <div className="flex justify-between">
             <span>Company Size</span>
-            <span>{emploerInfo.companySize}</span>
+            <span>{employerInfo.companySize}</span>
           </div>
           <div className="flex justify-between">
             <span>Email</span>
-            <span>{emploerInfo.email}</span>
+            <span>{employerInfo.email}</span>
           </div>
 
           <div className="flex justify-between">
             <span>Phone</span>
-            <span>{emploerInfo.phone}</span>
+            <span>{employerInfo.phone}</span>
           </div>
 
           <div className="flex justify-between">
             <span>Website</span>
-            <span>{emploerInfo.website}</span>
+            <span>{employerInfo.website}</span>
           </div>
 
           <div className="flex justify-between">
             <span>Address</span>
-            <span>{emploerInfo.address}</span>
+            <span>{employerInfo.address}</span>
           </div>
         </div>
       </Col>
@@ -47,7 +47,7 @@ function EmployerInfo({ emploerInfo }: { emploerInfo: any }) {
           <b>About</b>
         </h1>
 
-        <span>{emploerInfo.about}</span>
+        <span>{employerInfo.about}</span>
       </Col>
     </Row>
   );
