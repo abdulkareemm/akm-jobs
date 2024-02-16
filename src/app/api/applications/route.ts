@@ -1,4 +1,5 @@
 import { connectDB } from "@/config/dbConfig";
+import { sendEmail } from "@/helpers/sendEmail";
 import { validateJWT } from "@/helpers/validateJWT";
 import Application from "@/models/applicationModel";
 import { NextRequest, NextResponse } from "next/server";
@@ -19,6 +20,17 @@ export async function POST(request: NextRequest) {
           path: "user",
           select:"-password"
         },
+      });
+      await sendEmail({
+        to: applicationData.job.user.email,
+        subject: "New application received",
+        text: `You have received a new application from ${applicationData.user.name}`,
+        html: `<div>
+      <p>You have received a new application from ${applicationData.user.name}</p>
+      <p>Applicant's name is ${applicationData.user.name}</p>
+      <p>Applicant's email: ${applicationData.user.email}</p>
+      <p>Applicant's phone number: ${applicationData.user.phone}</p>
+      </div>`,
       });
 
     return NextResponse.json({
