@@ -12,11 +12,12 @@ export async function POST(request: NextRequest) {
     const application: any = await Application.create(reqBody);
 
     const applicationData: any = await Application.findById(application._id)
-      .populate("user")
+      .populate("user","-password")
       .populate({
         path: "job",
         populate: {
           path: "user",
+          select:"-password"
         },
       });
 
@@ -49,11 +50,12 @@ export async function GET(request: NextRequest) {
     }
 
     const applications = await Application.find(filtersObject)
-      .populate("user")
+      .populate("user","-password")
       .populate({
         path: "job",
         populate: {
           path: "user",
+          select:"-password"
         },
       });
     return NextResponse.json({

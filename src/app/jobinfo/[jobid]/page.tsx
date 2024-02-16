@@ -3,7 +3,6 @@ import React from "react";
 import { useRouter, useParams } from "next/navigation";
 import PageTitle from "@/components/PageTitle";
 import { Button, Col, Divider, Form, Row, message } from "antd";
-import JobPostForm from "@/components/JobPostForm";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setLoading } from "@/redux/loader";
@@ -40,12 +39,26 @@ function JobInfo() {
       dispatch(setLoading(false));
     }
   };
-
+  const onApply = async () => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios.post(`/api/applications`, {
+        job: jobData._id,
+        user: currentUser._id,
+        status: "pending",
+      });
+      message.success(response.data.message);
+      router.back()
+    } catch (error: any) {
+      message.error(error.message);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
   React.useEffect(() => {
     fetchJob();
+    fetchApplications();
   }, []);
-
-  
 
   return (
     jobData && (
@@ -107,6 +120,7 @@ function JobInfo() {
                 disabled={
                   currentUser.userType === "employer" || applications.length > 0
                 }
+                onClick={onApply}
               >
                 Apply
               </Button>
