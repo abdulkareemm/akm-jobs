@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Welcome to **AKMJobs!**
+
+AKMJobs is a powerful platform designed to connect job seekers with employers, facilitating the job search process efficiently and effectively. Below, you'll find essential information to get started with using AKMJobs.
+
+## Features
+
+**Job Search**: Job seekers can search for jobs based on various criteria such as job  location.
+
+**Job Listings**: Employers can post job openings, providing detailed descriptions of job roles, responsibilities, qualifications, and application instructions.
+
+**Application Tracking**: Job seekers can track the status of their job applications, including whether they've been viewed or if any actions have been taken by employers.
+
+**Customizable Profiles**: Both job seekers and employers can create personalized profiles, showcasing their skills, experience, and preferences.
 
 ## Getting Started
 
-First, run the development server:
+**Sign Up**: If you're a new user, sign up for an account on AKMJobs. Job seekers can create candidate profiles, while employers can create company profiles and post job listings.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Explore**: Browse through job listings to find opportunities that match your interests, skills, and qualifications. Use the search filters to narrow down your options.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Apply**: Once you find a job that interests you, read the job description carefully, and follow the application instructions provided by the employer.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Track Applications**: Keep track of the jobs you've applied for and monitor the status of your applications. Be proactive in following up with employers if necessary.receiving email notifications directly in their inbox.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Support
 
-## Learn More
+If you encounter any issues or have questions about using AKMJobs, please don't hesitate to reach out to our support team. We're here to assist you with any inquiries or technical difficulties you may experience.
 
-To learn more about Next.js, take a look at the following resources:
+## Feedback
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+We value your feedback! If you have suggestions for improving AKMJobs or encounter any bugs or glitches, please let us know. Your input helps us continually enhance the platform to better serve our users.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The AKMJobs Team.
