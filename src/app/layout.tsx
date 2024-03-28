@@ -3,7 +3,7 @@ import "./globals.css";
 import "./../styleSheets/commenClasses.css";
 import "./../styleSheets/antdOverride.css";
 import "./../styleSheets/layout.css";
-import "./../styleSheets/loader.css";
+import "./../styleSheets/Loader.css";
 import LayoutProvider from "@/components/LayoutProvider";
 import ReduxProvider from "@/components/ReduxProvider";
 
