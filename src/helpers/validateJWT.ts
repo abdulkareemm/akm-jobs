@@ -9,7 +9,7 @@ export const validateJWT = async(request:NextRequest)=>{
         if(!token){
             throw new Error('No token found')
         }
-        const decodedData:any = jwt.verify(token,process.env.JWT_SECRET)
+        const decodedData:any = jwt.verify(token,process.env.JWT_SECRET as string)
         return decodedData.userId
 
         
