@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./../stylesheets/commenClasses.css";
-import "./../stylesheets/antdOverride.css";
-import "./../stylesheets/layout.css";
-import "./../stylesheets/loader.css";
+import "./../styleSheets/commenClasses.css";
+import "./../styleSheets/antdOverride.css";
+import "./../styleSheets/layout.css";
+import "./../styleSheets/loader.css";
 import LayoutProvider from "@/components/LayoutProvider";
 import ReduxProvider from "@/components/ReduxProvider";
 
